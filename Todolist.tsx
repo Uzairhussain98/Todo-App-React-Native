@@ -8,15 +8,18 @@ import { Body, Button, CheckBox, Container, Content, Header, Icon, List, ListIte
 
 export default function Todolist(props:any) {
 
-    props.todolist
     return(
         <List>
             {
                 props.todolist.map((item:any)=>(
-                    <ListItem>
-                        <CheckBox checked={true} />
-                        <Text>{item.title}</Text>
-                        <Icon name="trash"></Icon>
+                    <ListItem key={item.id}>
+                        <Text style={{flex:1}}>{item.id}.</Text>
+                        <View style={{flex:1}}>
+                        <CheckBox  checked={true} />
+ 
+                        </View>
+                        <Text style={{flex:5}} >{item.title}</Text>
+                        <Icon style={{flex:1}} name="trash"></Icon>
                     </ListItem>
 
                 )

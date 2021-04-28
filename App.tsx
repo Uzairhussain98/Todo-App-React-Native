@@ -5,11 +5,14 @@ import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { Body, Button, Container, Content, Header, Text ,  } from 'native-base';
 import Todolist from './Todolist';
+import AddTodo from './AddTodo';
 // import { Header } from 'react-native/Libraries/NewAppScreen';
 
 export default function App() {
 
   const [isReady , setisReady] = useState(false);
+  const [showAddTodo , setAddTodo] = useState(false)
+  const [counter, setCounter] = useState(4)
   const [todolist , setTodolist] = useState([
     {
     id:1,
@@ -37,11 +40,31 @@ export default function App() {
   },[])
 
 
+  const AddTodoitem = (Todotext:string) => {
+    console.log("hello from fn addtodo");
+    const todoItem = {
+      id :counter,
+      title: Todotext,
+      completed :false
+    
+    }
+    setCounter(counter+1)
+    setTodolist([...todolist, todoItem])
+    setAddTodo(false)
+  }
+
   if(!isReady)
   return(
     <Text>Loading....</Text>
 
   )
+
+  if(showAddTodo){
+    return(
+      <AddTodo AddTodoitem={AddTodoitem}/>
+    )
+
+  }
 
   return (
     <Container>
@@ -52,7 +75,12 @@ export default function App() {
       </Header>
       <Content>
         <Text>Hello From APp</Text>
-        <Button rounded full style={{backgroundColor:'green' , marginHorizontal:30 , marginBottom:10}}><Text>Add Todo</Text></Button>
+        <Button rounded full style={{backgroundColor:'green' , marginHorizontal:30 , marginBottom:10}} 
+        onPress={()=> {
+        setAddTodo(true);
+      
+      }}
+        ><Text>Add Todo</Text></Button>
         <Todolist todolist={todolist}/>
       </Content>
 
