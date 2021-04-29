@@ -81,7 +81,7 @@ export default function App() {
       
       }}
         ><Text>Add Todo</Text></Button>
-        <Todolist todolist={todolist}/>
+        <Todolist todolist={todolist} setTodolist={setTodolist}/>
       </Content>
 
     </Container>
